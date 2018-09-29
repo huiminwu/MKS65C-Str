@@ -61,12 +61,12 @@ char * mystrchr(char *s, char c){
 }
 
 int main() {
-  char s1[10] ="HELLO!";
+  char s1[8] ="HELLO!";
   char s2[] = "hello?";
-  char *s3 = "hello";
+  char *s3 = "world";
   char s4[] = "";
 
-  printf("S! %s\n", s1);
+  printf("S1 %s\n", s1);
   printf("S2 %s\n", s2);
   printf("S3 %s\n", s3);
   printf("S4 %s\n", s4);
@@ -91,14 +91,51 @@ int main() {
   printf("[standard]: %ld\n", strlen(s4));
   printf("[mine]: %d\n", mystrlen(s4));
 
-  printf("============================\nTesting strncpy (s1, s3, 3)\n");
-  printf("[standard]: %s\n", strncpy(s1, s3, 3));
-  printf("[mine]: %s\n", strncpy(s1, s3, 3));
+  printf("============================\nTesting strncpy\n");
   
-  printf("============================\nTesting strncat (s1, s3, 3)\n");
-  printf("[standard]: %s\n", strncpy(s1, s3, 3));
-  printf("[mine]: %s\n", strncpy(s1, s3, 3));
+  printf("Standard\n strncpy(s2,s3,3) \n");
+  printf("[standard]: %s\n", strncpy(s2, s3, 3));
+  printf("[mine]: %s\n", mystrncpy(s2, s3, 3));
+  printf("s2: %s\n", s2);
+  
+  
+  printf("Copy char array into a smaller char array\n strncpy(s1, s2, 4)\n");
+  printf("[standard]: %s\n", strncpy(s1, s2, 4));
+  printf("[mine]: %s\n", mystrncpy(s1, s2, 4));
+  printf("s1: %s\n", s1);
+  
+  // need to look into this 
+  // why does strncpy return "worrlo?"
+  printf("CONFUSED +++++++++++++++++++++++++++++++++++++++++++++++\n");
+  printf("Copy char array into an empty char arrray\n strncpy(s4, s2, 3)\n");
+  printf("s4: %s\n", s4);
+  printf("s2: %s\n", s2);
+  printf("[standard]: %s\n", strncpy(s4, s2, 3)); // returns "worllo?"
+  printf("[mine]: %s\n", mystrncpy(s4, s2, 3)); // returns ""
+  printf("s4: %s\n", s4);
 
+  // Segmentation fault
+  //printf("Copy char array into a string literal\n strncpy("abcd", s2, 3)\n");
+  //printf("[standard]: %s\n", strncpy("abcd", s2, 3));
+  //printf("[mine]: %s\n", mystrncpy("abcd", s2, 3));
+  
+  
+  printf("Copy a string literal into char array\n strncpy(s1, abcd, 3)\n");
+  printf("[standard]: %s\n", strncpy(s1, "abcd", 3));
+  printf("[mine]: %s\n", mystrncpy(s1, "abcd", 3));
+  printf("s1: %s\n", s1);
+  
+  // Segmentation fault 
+  //printf("Copy a string literal into a string literal\n strncpy(abcd, wxyz, 3)\n");
+  //printf("[standard]: %s\n", strncpy("abcd", "wxyz", 3));
+  //printf("[mine]: %s\n", mystrncpy("abcd", "wxyz", 3));
+  
+  // STACK SMASHING 
+  /*
+  printf("============================\nTesting strncat\n");
+  printf("[standard]: %s\n", strncat(s1, s3, 3));
+  printf("[mine]: %s\n", mystrncat(s1, s3, 3));
+  */
   printf("============================\nTesting strcmp\n");
   printf("Testing abcd vs abcd\n");
   printf("[standard]: %i\n", strcmp("abcd", "abcd"));
