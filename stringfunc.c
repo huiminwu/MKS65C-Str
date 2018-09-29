@@ -74,18 +74,30 @@ int main() {
   
   printf("============================\nLEN TESTING\n");
 
-  printf("standard %ld\n", strlen(s1));
-  printf("homemade %d\n", mystrlen(s1));
+  printf("Length of s1");
+  printf("[standard]: %ld\n", strlen(s1));
+  printf("[mine]: %d\n", mystrlen(s1));
+  
+  printf("Length of s2");
+  printf("[standard]: %ld\n", strlen(s2));
+  printf("[mine]: %d\n", mystrlen(s2));
+  
 
-  printf("standard %ld\n", strlen(s3));
-  printf("homemade %d\n", mystrlen(s3));
+  printf("Length of s3");
+  printf("[standard]: %ld\n", strlen(s3));
+  printf("[mine]: %d\n", mystrlen(s3));
 
-  printf("standard %ld\n", strlen(s4));
-  printf("homemade %d\n", mystrlen(s4));
+  printf("Length of s4");
+  printf("[standard]: %ld\n", strlen(s4));
+  printf("[mine]: %d\n", mystrlen(s4));
 
   printf("============================\nTesting strncpy (s1, s3, 3)\n");
-  printf("standard %s\n", strncpy(s1, s3, 6));
-  printf("homemade %s\n", strncpy(s1, s3, 6));
+  printf("[standard]: %s\n", strncpy(s1, s3, 3));
+  printf("[mine]: %s\n", strncpy(s1, s3, 3));
+  
+  printf("============================\nTesting strncat (s1, s3, 3)\n");
+  printf("[standard]: %s\n", strncpy(s1, s3, 3));
+  printf("[mine]: %s\n", strncpy(s1, s3, 3));
 
   printf("============================\nTesting strcmp\n");
   printf("Testing abcd vs abcd\n");
