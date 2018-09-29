@@ -27,6 +27,28 @@ char * mystrncat(char *dest, char *source, int n) {
   return original;
 }
 
+int mystrcmp(char *s1, char *s2) {
+    int i;
+    char * max;
+    if (strlen(s1) > strlen(s2)){
+        max = s1;
+    } else {
+        max = s2;
+    }
+    for (i = 0; i < strlen(max) + 1; i++){
+        printf("value of i: %i \n", i);
+        if(s1[i] == s2[i]) {
+            if (s1[i] == 0) {
+                return 0;
+            }
+        } else if (s1[i] > s2[i]) {
+            return 1;
+        } else { //this is if s2 is greater than s1
+            return -1;
+        }
+    }
+}
+
 int main() {
   char s1[10] ="HELLO!";
   char s2[] = "hello?";
@@ -54,48 +76,14 @@ int main() {
   printf("standard %s\n", strncpy(s1, s3, 6));
   printf("homemade %s\n", strncpy(s1, s3, 6));
 
-  
-  
+  printf("Testing abcd vs abcd\n");
+  printf("[standard]: %i\n", strcmp("abcd", "abcd"));
+  printf("[mine]: %i\n", mystrcmp("abcd", "abcd"));
+  printf("Testing abc vs abcd\n");
+  printf("[standard]: %i\n", strcmp("abc", "abcd"));
+  printf("[mine]: %i\n", mystrcmp("abc", "abcd"));
+  printf("Testing abcd vs abc\n");
+  printf("[standard]: %i\n", strcmp("abcd", "abc"));
+  printf("[mine]: %i\n", mystrcmp("abcd", "abc")); 
   return 0;
 }
-int mystrcmp(char *s1, char *s2) {
-    int i;
-    char * max;
-    if (strlen(s1) > strlen(s2)){
-        max = s1;
-    } else {
-        max = s2;
-    }
-    printf("max val: %i \n", strlen(max));
-    for (i = 0; i < strlen(max) + 1; i++){
-        printf("value of i: %i \n", i);
-        if(s1[i] == s2[i]) {
-            //printf("Value of s1: %i \n Value of s2: %i \n", *s1, *s2);
-            if (s1[i] == 0) {
-                return 0;
-            }
-        } else if (s1[i] > s2[i]) {
-            return 1;
-        } else { //this is if s2 is greater than s1
-            return -1;
-        }
-    }
-    return 11;
-
-}
-
-int main() {
-    printf("Testing abcd vs abcd\n");
-    printf("[standard]: %i\n", strcmp("abcd", "abcd"));
-    printf("[mine]: %i\n", mystrcmp("abcd", "abcd"));
-    printf("Testing abc vs abcd\n");
-    printf("[standard]: %i\n", strcmp("abc", "abcd"));
-    printf("[mine]: %i\n", mystrcmp("abc", "abcd"));
-    printf("Testing abcd vs abc\n");
-    printf("[standard]: %i\n", strcmp("abcd", "abc"));
-    printf("[mine]: %i\n", mystrcmp("abcd", "abc"));
-
-    return 0;
-
-
-} 
