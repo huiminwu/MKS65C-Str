@@ -17,32 +17,14 @@ char * mystrncpy(char *dest, char *source, int n) {
 }
 
 char * mystrncat(char *dest, char *source, int n) {
-    
-    printf("dest %s\n",dest);
-    printf("src %s\n",source);
     char *original = dest;
-    printf("dest %s\n",dest);
-    printf("src %s\n",source);
-    printf("og %s\n",original);
     while(*(dest++) != '\0');
     dest--;
-    printf("dest %s\n",dest);
-    printf("src %s\n",source);
-    printf("og %s\n",original);
     int i;
     for (i = 0; i < n && *(source+i) != '\0'; i++) {
-        printf("dest %s\n",dest);
-        printf("src %s\n",source);
-        printf("og %s\n",original);
         *(dest+i) = *(source+i);
     }
-    printf("dest %s\n",dest);
-    printf("src %s\n",source);
-    printf("og %s\n",original);
     *(dest+n) = '\0';
-    printf("dest %s\n",dest);
-    printf("src %s\n",source);
-    printf("og %s\n",original);
     return original;
 }
 
@@ -80,13 +62,13 @@ char * mystrchr(char *s, char c){
 }
 
 int main() {
-  char s1[8] ="HELLO!";
-  char s2[] = "hello?";
+  char s1[] ="HELLO!";
+  char s2[256] = "hello?";
   char *s3 = "world";
   char s4[] = "";
   
-  char r1[8] ="HELLO!";
-  char r2[] = "hello?";
+  char r1[] ="HELLO!";
+  char r2[256] = "hello?";
   char *r3 = "world";
   char r4[] = "";
   
@@ -169,14 +151,13 @@ int main() {
   
   printf("============================\nTesting strncat\n");
   
-  char s5[8] ="BIRMAN";
-  char s6[] = "DEVON";
+  char s5[] ="BIRMAN";
+  char s6[256] = "DEVON";
   char *s7 = "MANX";
   char s8[] = "";
   
-  char r5[8] ="BIRMAN";
-  char p6[] = "DEVON";
-  char r6[] = "DEVON";
+  char r5[] ="BIRMAN";
+  char r6[256] = "DEVON";
   char *r7 = "MANX";
   char r8[] = "";
   
@@ -185,24 +166,15 @@ int main() {
   printf("S7 %s\n", s7);
   printf("S8 %s\n", s8);
   
-  char mycatDest [256] = "goodbye";
-    char mycatSrc [] = "ciao";
-    char catdest [256] = "goodbye";
-    char catsrc [] = "ciao";
-    printf("Testing strncat with %s and %s\n", catdest, catsrc);
-    printf("[standard]: %s\n", strncat(catdest, catsrc, 2));
-    printf("[mine]: %s\n", mystrncat(mycatDest, mycatSrc, 2));
-  
-  
   // STACK SMASHING 
   //printf("[standard]: %s\n", strncat(s1, s3, 3));
   //printf("[mine]: %s\n", mystrncat(s1, s3, 3));
   
   printf("Standard\n strncat(s6,s7,3) \n");
   printf("[standard]: %s\n", strncat(s6, s7, 10));
-  printf("[mine]: %s\n", mystrncat(p6, r7, 10));
+  printf("[mine]: %s\n", mystrncat(r6, r7, 10));
   printf("s6: %s\n", s6);
-  printf("r6: %s\n", p6);
+  printf("r6: %s\n", r6);
   
   // STACK SMASHING
   //printf("Cat char array into a smaller char array\n strncat(s5, s6, 4)\n");
@@ -210,6 +182,7 @@ int main() {
   //printf("[mine]: %s\n", mystrncat(s5, s6, 4));
   //printf("s5: %s\n", s5);
   
+  /*
   printf("Cat char array into an empty char arrray\n strncat(s8, s6, 3)\n");
   printf("s8: %s\n", s8);
   printf("r8: %s\n", r8);
@@ -219,6 +192,8 @@ int main() {
   printf("[mine]: %s\n", mystrncat(r8, r6, 3));
   printf("s8: %s\n", s8);  
   printf("r8: %s\n", r8);  
+  */
+  
   
   // Segmentation fault 
   //printf("Cat char array into a string literal\n strncat(abcd, s6, 3)\n");
@@ -228,8 +203,8 @@ int main() {
   printf("Cat a string literal into char array\n strncat(s6, abcd, 3)\n");
   printf("[standard]: %s\n", strncat(s6, "abcd", 3));
   printf("[mine]: %s\n", mystrncat(r6, "abcd", 3));
-  printf("s5: %s\n", s5);
-  printf("r5: %s\n", r5);
+  printf("s6: %s\n", s6);
+  printf("r6: %s\n", r6);
   
   // Segmentation fault
   //printf("Cat a string literal into a string literal\n strncat(abcd, wxyz, 3)\n");
